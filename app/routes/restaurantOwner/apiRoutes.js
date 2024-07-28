@@ -3,6 +3,7 @@ const userController = require("../../controller/restaurantOwner/apiController/u
 const blogController = require("../../controller/restaurantOwner/apiController/crudBlogController");
 const restaurantControlller = require("../../controller/restaurantOwner/apiController/crudRestaurantController");
 const categoryController = require("../../controller/restaurantOwner/apiController/crudCategoryController");
+const menuController = require("../../controller/restaurantOwner/apiController/crudMenuController");
 const upload = require("../../helper/multer");
 const { verifyToken } = require("../../middleware/auth");
 const router = express.Router();
@@ -15,7 +16,7 @@ router.post("/restaurant/add", verifyToken, upload.single("image"), restaurantCo
 // add category
 router.post("/category/add", verifyToken, categoryController.createCategory);
 // add menu
-// router.post("/menu/add", upload.single("image"), userController.createMenuItem);
+router.post("/menu/add", upload.single("image"), verifyToken, menuController.createMenu);
 // add blog
 router.post("/blog/add", upload.single("image"), blogController.createBlog);
 module.exports = router

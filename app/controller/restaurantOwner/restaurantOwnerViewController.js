@@ -61,7 +61,7 @@ addCategory = async (req, res) => {
     if(!restaurant) return res.redirect("/restaurantOwner/restaurant/add")
     res.render("restaurantOwner/layouts/Menu", {
       title: "Restaurant dashboard",
-      logUser: req.user
+      logUser: req.user,
     });
   };
 
@@ -76,6 +76,7 @@ addCategory = async (req, res) => {
     res.render("restaurantOwner/layouts/AddMenu", {
       title: "Add restaurant Form",
       logUser: req.user,
+      categories
     });
   };
   

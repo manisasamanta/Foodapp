@@ -39,6 +39,7 @@ app.set("view engine", "ejs");
 app.set("views", "views");
 app.use(express.static(path.join(__dirname,'public/user')))
 app.use(express.static(path.join(__dirname,'public/admin')))
+app.use("/uploads",express.static(path.join(__dirname,'uploads')))
 // routes user
 app.use("/", userApiRoutes);
 app.use("/", userViewRoutes);
