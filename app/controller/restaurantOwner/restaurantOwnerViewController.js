@@ -48,6 +48,14 @@ class RestaurantOwnerViewController {
         })
     }
 }
+addCategory = async (req, res) => {
+    const restaurant = await restaurantModel.findOne({owner: req.user.id})
+    if(!restaurant) return res.redirect("/restaurantOwner/restaurant/add")
+    res.render("restaurantOwner/layouts/AddCategory", {
+      title: "Add restaurant Form",
+      logUser: req.user,
+    });
+}
   menu = async (req, res) => {
     const restaurant = await restaurantModel.findOne({owner: req.user.id})
     if(!restaurant) return res.redirect("/restaurantOwner/restaurant/add")
@@ -60,7 +68,12 @@ class RestaurantOwnerViewController {
   addMenu = async (req, res) => {
     const restaurant = await restaurantModel.findOne({owner: req.user.id})
     if(!restaurant) return res.redirect("/restaurantOwner/restaurant/add")
-    res.render("admin/layouts/AddMenu", {
+    const categories = await categoryModel.find()
+    if(categories.length == 0){ 
+      req.flash("error_msg", "Please add category first")
+      return res.redirect("/restaurantOwner/category/add")
+    }
+    res.render("restaurantOwner/layouts/AddMenu", {
       title: "Add restaurant Form",
       logUser: req.user,
     });

@@ -6,7 +6,10 @@ const categorySchema = new mongoose.Schema({
   restaurant:{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Restaurant"
-  }
+  },
+}, {
+  timestamps: true,
+  versionKey: false
 });
 
 module.exports = mongoose.model("Category", categorySchema);

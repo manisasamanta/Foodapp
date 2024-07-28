@@ -6,22 +6,24 @@ class CRUDCategoryController {
             const restaurant = await restaurantModel.findOne({owner: req.user.id})
             if(!restaurant){
                 req.flash("error", "Please create restaurant first")
-                return res.redirect("/restaurant/create")
+                return res.redirect("/restaurantOwner/restaurant/add")
             }
             const {name} = req.body
             if(!name){
                 req.flash("error", "Category Name is required")
-                return res.redirect("/category/create")
+                return res.redirect("/restaurantOwner/category/add")
+            }
+            const existingcategory = await categoryModel.findOne({name})
+            if(existingcategory){
+                req.flash("error", "Category already exists")
+                return res.redirect("/restaurantOwner/category/add")
             }
             const category = new categoryModel({
                 name,
                 restaurant: restaurant._id
             })
             await category.save()
-            return res.status(200).json({
-                success: true,
-                message: "Category created successfully"
-            })
+            return res.redirect("/category")
         }catch(err){
             return res.status(500).json({
                 success: false,
