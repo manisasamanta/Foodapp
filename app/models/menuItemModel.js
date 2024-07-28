@@ -10,7 +10,7 @@ const menuSchema = new mongoose.Schema({
         type: Number,
     },
     image: {
-        type: [String]  // menu image can be multiple
+        type: String,
     },
     category: {
         type: mongoose.Schema.Types.ObjectId,
