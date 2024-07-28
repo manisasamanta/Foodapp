@@ -30,7 +30,9 @@ class CRUDCategoryController {
                 message: err.message
             })
         }
-    }
+    } 
+
+    
 }
 
 module.exports = new CRUDCategoryController()
