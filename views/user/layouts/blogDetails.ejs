@@ -1,0 +1,92 @@
+
+<%-include('../partials/header')%>
+    <!-- end header section -->
+  </div>
+
+  <!-- book section -->
+  <section class="book_section layout_padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="blog-post">
+                    <img src="https://via.placeholder.com/600x400" alt="Post Image">
+                    <div class="post-date">Apr. 14th, 2022</div>
+                    <div class="post-title">Thought you loved Python? Wait until you meet Rust</div>
+                    <div class="post-excerpt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, nobis ea quis inventore vel voluptas.</div>
+                </div>
+                <!-- Comments Section -->
+                <div class="comments-section">
+                    <h3 class="p-3" style="border-bottom: 1px solid black;">Comments</h3>
+                    <div class="comment">
+                        <div class="comment-author">John Doe</div>
+                        <div class="comment-date">Apr. 15th, 2022</div>
+                        <div class="comment-text">Great article! I really enjoyed it.</div>
+                    </div>
+                    <div class="comment">
+                        <div class="comment-author">Jane Smith</div>
+                        <div class="comment-date">Apr. 16th, 2022</div>
+                        <div class="comment-text">Interesting perspective on Rust!</div>
+                    </div>
+
+                    <!-- Add Comment Form -->
+                    <form class="p-3" action="/blog/comment?userId=123" method="post" style="border: 1px solid black;">
+                        <div class="form-group">
+                            <label for="comment-author">Name</label>
+                            <input type="text" class="form-control" id="comment-author" value="<%=logUser.name%>" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="comment-text">Comment</label>
+                            <textarea class="form-control" id="comment-text" rows="3" placeholder="Your comment"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit Comment</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <!-- Search bar -->
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Search Blogs ...">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- Recent blog post -->
+                <div class="recent-posts text-dark p-2 h3" style="border-bottom: 1px solid black">Recent Posts</div>
+                <div class="blog-post">
+                    <div class="post-date">Apr. 14th, 2022</div>
+                    <div class="post-title">Don’t assume your user data in the cloud is safe</div>
+                    <div class="post-excerpt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, nobis ea quis inventore vel voluptas.</div>
+                    <a href="#" class="btn btn-link read-more">Continue Reading</a>
+                </div>
+                <div class="blog-post">
+                    <div class="post-date">Apr. 14th, 2022</div>
+                    <div class="post-title">Meta unveils fees on metaverse sales</div>
+                    <div class="post-excerpt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, nobis ea quis inventore vel voluptas.</div>
+                    <a href="#" class="btn btn-link read-more">Continue Reading</a>
+                </div>
+                <div class="blog-post">
+                    <div class="post-date">Apr. 14th, 2022</div>
+                    <div class="post-title">UK sees highest inflation in 30 years</div>
+                    <div class="post-excerpt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, nobis ea quis inventore vel voluptas.</div>
+                    <a href="#" class="btn btn-link read-more">Continue Reading</a>
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>
+  <!-- end book section -->
+
+ <!-- footer section -->
+ <%-include('../partials/footer')%>
+
+ <!-- footer section -->
+
+ <%-include('../partials/script')%>
+
+  
+
+</body>
+
+</html>
