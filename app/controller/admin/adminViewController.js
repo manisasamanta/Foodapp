@@ -1,3 +1,7 @@
+const orderModel = require("../../models/orderModel");
+const restaurantModel = require("../../models/restaurantModel");
+const userModel = require("../../models/userModel");
+
 class AdminViewController {
   login = async (req, res) => {
     try {
@@ -12,16 +16,35 @@ class AdminViewController {
     }
   };
   admindashboard = async (req, res) => {
-    res.render("admin/layouts/dashboard", {
-      title: "Dashboard",
-      logUser: req.user,
-    });
+    try{    
+
+      const totalUser=await userModel.find({role:{$ne:'admin'}})
+      const totalOrder=await orderModel.find()
+      const totalrestaurant=await restaurantModel.find()
+
+      if(!(totalUser && totalOrder && totalrestaurant)){
+        req.flash("error", "user && order not Found")
+      }
+
+      res.render("admin/layouts/dashboard", {
+        title: "Dashboard",
+        logUser: req.user,
+        Users:totalUser.length,
+        orders:totalOrder.length,
+        restaurants:totalrestaurant.length
+
+      });
+
+    }catch(err){
+      req.flash("error", "Error Occured")
+    }
+
   };
 
   allReviews = async (req, res) => {
     res.render("admin/layouts/AllReview", {
       title: "All reviews",
-      logUser: req.user,
+      logUser: req.user
     });
   };
 
@@ -31,6 +54,10 @@ class AdminViewController {
       logUser: req.user,
     });
   };
+
+
+
+
 }
 
 module.exports = new AdminViewController();

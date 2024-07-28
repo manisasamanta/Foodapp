@@ -51,5 +51,5 @@ app.use("/partner", restaurantOwnerApiRoutes);
 app.use("/restaurantOwner", restaurantOwnerViewRoutes);
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
-  console.log("Server started on port " + PORT);
+  console.log("Server started on port " + `http://localhost:${PORT}`);
 });
