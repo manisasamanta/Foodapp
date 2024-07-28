@@ -55,6 +55,13 @@ class AdminViewController {
     });
   };
 
+  allUser = async (req, res) => {
+    res.render("admin/layouts/Alluser", {
+      title: "All user",
+      logUser: req.user,
+    });
+  };
+
 
 
 

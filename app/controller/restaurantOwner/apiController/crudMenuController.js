@@ -26,10 +26,7 @@ class CRUDMenuController {
                 image: `${req.protocol}://${req.get('host')}/uploads/${image}`,
             })
             await menu.save()
-            return res.status(200).json({
-                success: true,
-                message: "Menu created successfully"
-            })  
+            return res.redirect("/restaurantOwner/menu")
         }catch(err){
             if(req.file){
                 fs.unlinkSync(`uploads/${req.file.filename}`)
