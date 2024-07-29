@@ -35,6 +35,9 @@ class CRUDRestaurantController {
             await restaurant.save()
             return res.redirect("/restaurantOwner/restaurant")
         }catch(err){
+            if(req.file){
+                fs.unlinkSync(`uploads/${req.file.filename}`)
+            }
             return res.status(500).json({
                 success: false,
                 message: err.message

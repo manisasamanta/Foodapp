@@ -1,4 +1,9 @@
 const Token = require("../../models/tokenModel");
+const User = require("../../models/userModel");
+const Category = require("../../models/categoryModel");
+const Menu = require("../../models/menuItemModel");
+const Blog = require("../../models/blogModel");
+const Review = require("../../models/reviewModel");
 class UserViewController {
   verify = async (req, res) => {
     try {
@@ -56,6 +61,7 @@ class UserViewController {
 
   home = async (req, res) => {
     try {
+      const menus = await Menu.find();
       res.render("user/layouts/home", {
         title: "home",
         logUser: req.user,
