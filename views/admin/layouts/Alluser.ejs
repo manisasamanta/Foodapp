@@ -79,7 +79,7 @@
                   <th scope="col">Phone</th>
                   <th scope="col">Email</th>
                  
-                  <th scope="col">Action</th>
+               
                 </tr>
               </thead>
               <tbody>
@@ -98,15 +98,50 @@
                      <%= item.email%>
                   </td>
                  
-                  <td>
-                    <a href="">
-                      <button class="btn btn-danger">delete</button>
-                    </a>
-                    <a href="">
-                      <button class="btn btn-warning"i>edit</button>
-                    </a>
+             
+                </tr>
+              <% }%>
+                
+                 </tbody>
+            </table>
 
+
+          </div>
+
+          <!-- resturant  -->
+
+          <h1 class="text-center">Restaurant Owner</h1>
+
+          <div class="container">
+
+            <!-- <h1 class="text-center">Get All Data</h1> -->
+            <table class="table">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Phone</th>
+                  <th scope="col">Email</th>
+                 
+               
+                </tr>
+              </thead>
+              <tbody>
+                <!--data map here -->
+               
+               <% for(let item of resdata){%>
+                <tr>
+                  <th scope="row"><%= j++%></th>
+                  <td>
+                    <%= item.name%>
                   </td>
+                  <td>
+                   <%= item.phone%>
+                  </td>
+                  <td>
+                     <%= item.email%>
+                  </td>
+           
 
                 </tr>
               <% }%>

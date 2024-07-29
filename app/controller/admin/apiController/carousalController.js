@@ -12,16 +12,21 @@ class CarousalController {
             const carousal = new carousalModel({
                 title,
                 description
-            })
-            await carousal.save()
-            return res.redirect("/admin/carousal");
+            });
+            await carousal.save();
+            res.render('user/layouts/home', {
+                title: 'Home',
+                logUser: req.user,
+                cardata: [carousal]  // Pass carousal as an array
+            });
         } catch (error) {
             return res.status(500).json({
                 success: false, 
                 message: error.message
-            })
+            });
         }
     }
 }
+
 
 module.exports = new CarousalController()
