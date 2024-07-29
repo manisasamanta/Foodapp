@@ -4,6 +4,10 @@ const Category = require("../../models/categoryModel");
 const Menu = require("../../models/menuItemModel");
 const Blog = require("../../models/blogModel");
 const Review = require("../../models/reviewModel");
+const BlogComment = require("../../models/blogCommentModel");
+const Restaurant = require("../../models/restaurantModel");
+const Order = require("../../models/orderModel");
+const Cart = require("../../models/addToCartModel");
 class UserViewController {
   verify = async (req, res) => {
     try {
@@ -62,9 +66,29 @@ class UserViewController {
   home = async (req, res) => {
     try {
       const menus = await Menu.find();
+      const reviews = await Review.aggregate([
+        {
+          $lookup: {
+            from: "users",
+            localField: "user",
+            foreignField: "_id",
+            as: "user",
+          },
+        },
+        {
+          $lookup: {
+            from: "restaurants",
+            localField: "restaurant",
+            foreignField: "_id",
+            as: "restaurant",
+          }
+        }
+      ])
       res.render("user/layouts/home", {
         title: "home",
         logUser: req.user,
+        menuData: menus,
+        reviewData: reviews
       });
     } catch (error) {
       console.log(error);
@@ -101,9 +125,69 @@ class UserViewController {
 
   menu = async (req, res) => {
     try {
+      const categories = await Category.find()
+      if(req.query.category){
+        // const menus = await Menu.find({category: req.query.category});
+        const menus = await Menu.find({category: req.query.category}).populate("restaurant")
+        return res.render("user/layouts/menu", {
+          title: "menu",
+          logUser: req.user,
+          menuData: menus,
+          categories
+        });
+      }
+      if(req.query.restaurant){
+        const menus = await Menu.find({restaurant: req.query.restaurant}).populate("restaurant")
+        return res.render("user/layouts/menu", {
+          title: "menu",
+          logUser: req.user,
+          menuData: menus,
+          categories
+        });
+      }
+      if(req.query.query){
+        const menus = await Menu.aggregate([
+          {
+            $lookup:{
+              from: "categories",
+              localField: "category",
+              foreignField: "_id",
+              as: "categoryData"
+            }
+          },
+          {
+            $lookup:{
+              from: "restaurants",
+              localField: "restaurant",
+              foreignField: "_id",
+              as: "restaurantData"
+            }
+          },
+          {
+            $match:{
+              $or:[
+                {name: {$regex: req.query.query, $options: "i"}},
+                {description: {$regex: req.query.query, $options: "i"}},
+                {'categoryData.name':{$regex: req.query.query, $options: "i"}},
+                {'restaurantData.name':{$regex: req.query.query, $options: "i"}},
+              ]
+            }
+          }
+        ])
+        // return res.json(menus)
+        return res.render("user/layouts/menu", {
+          title: "menu",
+          logUser: req.user,
+          menuData: menus,
+          categories
+        });
+      }
+      const menus = await Menu.find().populate("restaurant")
       res.render("user/layouts/menu", {
         title: "menu",
         logUser: req.user,
+        menuData: menus,
+        categories
       });
     } catch (error) {
       console.log(error);
@@ -114,9 +198,16 @@ class UserViewController {
 
   cart = async (req, res) => {
     try {
+      const cart = await Cart.findOne({user: req.user.id}).populate({
+        path: "cart.menu",
+        populate: {
+          path: "restaurant",
+        }
+      });
       res.render("user/layouts/cart", {
         title: "cart",
         logUser: req.user,
+        cartData: cart
       });
     } catch (error) {
       console.log(error);
@@ -127,9 +218,22 @@ class UserViewController {
 
   blog = async (req, res) => {
     try {
+      const blogsAll = await Blog.find().sort({createdAt: -1});
+      const blogsSort = await Blog.find().sort({createdAt: -1}).limit(3);
+      if(req.query.query){
+        const blogsSearch = await Blog.find({$or:[{name:{$regex: req.query.query, $options: "i"}},{content:{$regex: req.query.query, $options: "i"}}]}).sort({createdAt: -1});
+        return res.render("user/layouts/blog", {
+          title: "blog",
+          logUser: req.user,
+          recent: blogsSort,
+          allBlogs: blogsSearch
+        });
+      }
       res.render("user/layouts/blog", {
         title: "blog",
         logUser: req.user,
+        recent: blogsSort,
+        allBlogs: blogsAll
       });
     } catch (error) {
       console.log(error);
@@ -137,9 +241,16 @@ class UserViewController {
   };
   blogDetail = async (req, res) => {
     try {
+      const {_id}= req.params
+      const blog = await Blog.findOne({_id})
+      const blogsSort = await Blog.find().sort({createdAt: -1}).limit(3);
+      const comments = await BlogComment.find({blog: _id})
       res.render("user/layouts/blogDetails", {
         title: "blog",
         logUser: req.user,
+        recent: blogsSort,
+        blog,
+        comments
       });
     } catch (error) {
       console.log(error);
@@ -147,9 +258,11 @@ class UserViewController {
   };
   restaurant = async (req, res) => {
     try {
+      const restaurants = await Restaurant.find().populate("reviews")
       res.render("user/layouts/restaurant", {
         title: "restaurant",
         logUser: req.user,
+        restaurants
       });
     } catch (error) {
       console.log(error);

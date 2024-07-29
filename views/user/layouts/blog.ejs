@@ -8,20 +8,15 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
+                <%for(let i of allBlogs){%>
                 <div class="blog-post">
-                    <img src="https://via.placeholder.com/600x400" alt="Post Image">
-                    <div class="post-date">Apr. 14th, 2022</div>
-                    <div class="post-title">Thought you loved Python? Wait until you meet Rust</div>
-                    <div class="post-excerpt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, nobis ea quis inventore vel voluptas.</div>
-                    <a href="#" class="btn btn-primary read-more">READ MORE</a>
+                    <img src="<%=i.image%>" alt="Post Image">
+                    <div class="post-date"><%=moment(i.createdAt).format('MMMM Do, YYYY')%></div>
+                    <div class="post-title"><%=i.name%></div>
+                    <div class="post-excerpt"><%=truncateHtml(i.content)%></div>
+                    <a href="/blog/<%=i._id%>" class="btn btn-primary read-more">READ MORE</a>
                 </div>
-                <div class="blog-post">
-                    <img src="https://via.placeholder.com/600x400" alt="Post Image">
-                    <div class="post-date">Apr. 14th, 2022</div>
-                    <div class="post-title">Startup vs corporate: What job suits you best?</div>
-                    <div class="post-excerpt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, nobis ea quis inventore vel voluptas.</div>
-                    <a href="#" class="btn btn-primary read-more">READ MORE</a>
-                </div>
+                <%}%>
             </div>
             <div class="col-lg-4">
                 <!-- Search bar -->
@@ -35,24 +30,14 @@
                 </div>
                 <div class="recent-posts text-dark p-2 h3" style="border-bottom: 1px solid black">Recent Posts</div>
                 <!-- blog post -->
+                <%for(let i of recent){%>
                 <div class="blog-post">
-                    <div class="post-date">Apr. 14th, 2022</div>
-                    <div class="post-title">Don’t assume your user data in the cloud is safe</div>
-                    <div class="post-excerpt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, nobis ea quis inventore vel voluptas.</div>
-                    <a href="#" class="btn btn-link read-more">Continue Reading</a>
+                    <div class="post-date"><%=moment(i.createdAt).format('MMM. Do, YYYY')%></div>
+                    <div class="post-title"><%=i.name%></div>
+                    <div class="post-excerpt"><%=truncateHtml(i.content)%></div>
+                    <a href="/blog/<%=i._id%>" class="btn btn-link read-more">Continue Reading</a>
                 </div>
-                <div class="blog-post">
-                    <div class="post-date">Apr. 14th, 2022</div>
-                    <div class="post-title">Meta unveils fees on metaverse sales</div>
-                    <div class="post-excerpt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, nobis ea quis inventore vel voluptas.</div>
-                    <a href="#" class="btn btn-link read-more">Continue Reading</a>
-                </div>
-                <div class="blog-post">
-                    <div class="post-date">Apr. 14th, 2022</div>
-                    <div class="post-title">UK sees highest inflation in 30 years</div>
-                    <div class="post-excerpt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, nobis ea quis inventore vel voluptas.</div>
-                    <a href="#" class="btn btn-link read-more">Continue Reading</a>
-                </div>
+                <%}%>
             </div>
         </div>
     </div>

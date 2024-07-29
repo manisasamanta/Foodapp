@@ -9,5 +9,8 @@ const blogSchema = new mongoose.Schema({
     image: {
         type: String,
     },
+}, {
+    timestamps: true,
+    versionKey: false
 });
 module.exports = mongoose.model("Blog", blogSchema)

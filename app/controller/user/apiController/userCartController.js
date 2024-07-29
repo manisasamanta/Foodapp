@@ -7,7 +7,7 @@ class CartController {
                 return res.redirect('/login');
             }
             const {id} = req.user
-            const {menu} = req.query
+            const menu = req.params._id
             const cart = await AddToCart.findOne({user: id});
             const existedMenu = await Menu.findOne({_id: menu});
             if(!existedMenu) {
@@ -31,6 +31,8 @@ class CartController {
                 });
                 await newCart.save();
             }
+
+            return res.redirect('/cart');
         } catch (error) {
             return res.status(500).json({
                 success: false,
