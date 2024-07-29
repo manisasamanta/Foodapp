@@ -23,7 +23,7 @@ class CRUDCategoryController {
                 restaurant: restaurant._id
             })
             await category.save()
-            return res.redirect("/category")
+            return res.redirect("/restaurantOwner/category")
         }catch(err){
             return res.status(500).json({
                 success: false,

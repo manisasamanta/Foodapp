@@ -62,7 +62,7 @@
                         <h1 class="text-center">Add Menu</h1>
                         <form action="/partner/menu/add" method="POST" enctype="multipart/form-data">
                             <div class="mb-3">
-                                <label for="name" class="form-label">Restaurant Name</label>
+                                <label for="name" class="form-label">Menu Name</label>
                                 <input type="text" class="form-control" id="name" name="name">
                             </div>
                             <div class="mb-3">
@@ -70,29 +70,15 @@
                                 <input type="text" class="form-control" id="name" name="description">
                             </div>
                             <div class="mb-3">
-                                <label for="address" class="form-label">Address</label>
-                                <input type="text" class="form-control" id="name" name="address">
+                                <label for="address" class="form-label">Price</label>
+                                <input type="text" class="form-control" id="name" name="price">
                             </div>
-                            <div class="mb-3">
-                                <label for="description" class="form-label">Email</label>
-                                <input type="text" class="form-control" id="name" name="email"
-                                    value="<%=logUser.email%>">
-                            </div>
-                            <div class="mb-3">
-                                <label for="description" class="form-label">Phone</label>
-                                <input type="text" class="form-control" id="name" name="phone">
-                            </div>
-                            <div class="mb-3">
-                                <label for="description" class="form-label">Cuisine</label>
-                                <input type="text" class="form-control" id="name" name="cuisine">
-                            </div>
-                            <div class="mb-3">
-                                <label for="description" class="form-label">Opening Time</label>
-                                <input type="time" class="form-control" id="name" name="openingTime">
-                            </div>
-                            <div class="mb-3">
-                                <label for="description" class="form-label">Closing Time</label>
-                                <input type="time" class="form-control" id="name" name="closingTime">
+                            <div class="mb-3 form-group">
+                                <select class="form-control" aria-label="Default select example" name="category">
+                                    <%for(let i of categories){%>
+                                    <option value="<%= i._id %>"><%= i.name %></option>
+                                    <%}%>
+                                  </select>
                             </div>
                             <div class="mb-3">
                                 <label for="formFile" class="form-label">Upload Image</label>
