@@ -75,43 +75,50 @@
               <thead class="thead-dark">
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">Restaurant</th>
-                  <th scope="col">Users</th>
-                  <th scope="col">Reviews</th>
-                 
+                  <th scope="col">name</th>
+                  <th scope="col">address</th>
+                  <th scope="col">phone</th>
+                  <th scope="col">openingTime</th>
+                  <th scope="col">closingTime</th>
                   <th scope="col">Action</th>
                 </tr>
               </thead>
               <tbody>
                 <!--data map here -->
-               
-                  <tr>
-                    <th scope="row"></th>
-                    <td>
-                
-                    </td>
-                    <td>
-                     
-                    </td>
-                    <td>
-              
-                    </td>
-                   
-                    <td>
-                      <a href="">
-                        <button class="btn btn-danger">delete</button>
-                      </a>
-                      <a href="">
-                        <button class="btn btn-warning"i>edit</button>
-                      </a>
+                <% count=data.length*0 %>
+          <% for(let item of data){%>
+            <tr>
+              <th scope="row"><%=++count%></th>
+              <td>
+               <%= item.name%>
+              </td>
+              <td>
+                <%= item.address%>
+              </td>
+              <td>
+                <%= item.phone%>
+              </td>
+              <td>
+                <%= item.openingTime%>
+              </td>
+              <td>
+                <%= item.closingTime%>
+              </td>
+             
+              <td>
+                <a href="">
+                  <button class="btn btn-danger">delete</button>
+                </a>
+                <a href="">
+                  <button class="btn btn-warning"i>edit</button>
+                </a>
 
-                    </td>
+              </td>
 
-                  </tr>
-                
+            </tr>
+         <% }%>
 
-
-              </tbody>
+                </tbody>
             </table>
 
 

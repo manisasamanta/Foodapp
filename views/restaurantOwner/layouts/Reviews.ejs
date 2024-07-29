@@ -73,37 +73,41 @@
               <thead class="thead-dark">
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">Name</th>
+                  <th scope="col">user</th>
                   
                   <th scope="col">Reviews</th>
+                  <th scope="col">restaurant</th>
                  
                   <th scope="col">Action</th>
                 </tr>
               </thead>
               <tbody>
                 <!--data map here -->
-               
-                  <tr>
-                    <th scope="row"></th>
-                    <td>
-                
-                    </td>
-                   
-                    <td>
-              
-                    </td>
-                   
-                    <td>
-                      <a href="">
-                        <button class="btn btn-danger">delete</button>
-                      </a>
-                      <a href="">
-                        <button class="btn btn-warning"i>edit</button>
-                      </a>
+                <%= count=data.length%>
+               <%for (let item of reviews){%>
+                <tr>
+                  <th scope="row"><%= ++count%></th>
+                  <td>
+              <%= item.user.name%>
+                  </td>
+                 
+                  <td>
+            <%= item.restaurant%>
+                  </td>
+                 
+                  <td>
+                    <a href="">
+                      <button class="btn btn-danger">delete</button>
+                    </a>
+                    <a href="">
+                      <button class="btn btn-warning"i>edit</button>
+                    </a>
 
-                    </td>
+                  </td>
 
-                  </tr>
+                </tr>
+               <%} %>
+             
                 
 
 
