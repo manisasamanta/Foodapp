@@ -85,33 +85,33 @@
               <tbody>
                 <!--data map here -->
                
-                  <tr>
-                    <th scope="row"></th>
-                    <td>
+               <% for(let item of data){%>
+                <tr>
+                  <th scope="row"><%= i++%></th>
+                  <td>
+                    <%= item.name%>
+                  </td>
+                  <td>
+                   <%= item.phone%>
+                  </td>
+                  <td>
+                     <%= item.email%>
+                  </td>
+                 
+                  <td>
+                    <a href="">
+                      <button class="btn btn-danger">delete</button>
+                    </a>
+                    <a href="">
+                      <button class="btn btn-warning"i>edit</button>
+                    </a>
+
+                  </td>
+
+                </tr>
+              <% }%>
                 
-                    </td>
-                    <td>
-                     
-                    </td>
-                    <td>
-              
-                    </td>
-                   
-                    <td>
-                      <a href="">
-                        <button class="btn btn-danger">delete</button>
-                      </a>
-                      <a href="">
-                        <button class="btn btn-warning"i>edit</button>
-                      </a>
-
-                    </td>
-
-                  </tr>
-                
-
-
-              </tbody>
+                 </tbody>
             </table>
 
 

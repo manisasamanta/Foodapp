@@ -6,5 +6,5 @@ router.get('/', adminViewController.login)
 router.get('/dashboard', verifyToken, checkRoleAdmin, adminViewController.admindashboard)
 router.get('/review', verifyToken, checkRoleAdmin, adminViewController.allReviews)
 router.get('/restaurant', verifyToken, checkRoleAdmin, adminViewController.allRestaurant)
-router.get('/user', verifyToken, checkRoleAdmin, adminViewController.allUser)
+router.get('/user', verifyToken, checkRoleAdmin, adminViewController.Alluser)
 module.exports = router

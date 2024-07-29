@@ -79,10 +79,20 @@ class AdminViewController {
    
 
   Alluser = async (req, res) => {
-    res.render("admin/layouts/AllRestaurant", {
-      title: "All Restaurant",
-      logUser: req.user,
-    });
+    try{
+
+      const data=await userModel.find({role:{$eq:'user'}})
+      res.render("admin/layouts/Alluser", {
+        title: "All User",
+        logUser: req.user,
+        data:data,
+        i:1
+  
+      });
+    }catch(err){
+      req.flash("error", "Error Occured")
+    }
+
   };
 
 
