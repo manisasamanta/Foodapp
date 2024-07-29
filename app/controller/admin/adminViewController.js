@@ -1,5 +1,6 @@
 const orderModel = require("../../models/orderModel");
 const restaurantModel = require("../../models/restaurantModel");
+const reviewModel = require("../../models/reviewModel");
 const userModel = require("../../models/userModel");
 
 class AdminViewController {
@@ -42,24 +43,56 @@ class AdminViewController {
   };
 
   allReviews = async (req, res) => {
-    res.render("admin/layouts/AllReview", {
-      title: "All reviews",
-      logUser: req.user
-    });
+    try{
+        const user=req.params.user
+      const allreview=await reviewModel.findById(user)
+
+      res.render("admin/layouts/AllReview", {
+        title: "All reviews",
+        logUser: req.user,
+       reviews:allreview
+      });
+
+    }catch(err){
+      req.flash("error", "Error Occured")
+    }
+  
   };
 
   allRestaurant = async (req, res) => {
-    res.render("admin/layouts/AllRestaurant", {
-      title: "All Restaurant",
-      logUser: req.user,
-    });
-  };
+    try{   
 
-  allUser = async (req, res) => {
-    res.render("admin/layouts/Alluser", {
-      title: "All user",
-      logUser: req.user,
-    });
+      const allrest=await restaurantModel.find()
+
+      res.render("admin/layouts/AllRestaurant", {
+        title: "All Restaurant",
+        logUser: req.user,
+        data:allrest
+       
+      });
+
+    }catch(err){
+      req.flash("error", "Error Occured")
+    }
+
+  };
+   
+
+  Alluser = async (req, res) => {
+    try{
+
+      const data=await userModel.find({role:{$eq:'user'}})
+      res.render("admin/layouts/Alluser", {
+        title: "All User",
+        logUser: req.user,
+        data:data,
+        i:1
+  
+      });
+    }catch(err){
+      req.flash("error", "Error Occured")
+    }
+
   };
 
 
