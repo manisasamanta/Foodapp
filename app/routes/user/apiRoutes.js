@@ -3,6 +3,7 @@ const userAuthController = require("../../controller/user/apiController/userAuth
 const userCartController = require("../../controller/user/apiController/userCartController");
 const { verifyToken } = require("../../middleware/auth");
 const searchController = require("../../controller/user/searchController");
+const commentController = require("../../controller/user/apiController/commentsController");
 const router = express.Router();
 router.post("/signup", userAuthController.signUp);
 router.post("/login", userAuthController.login);
@@ -11,4 +12,6 @@ router.post("/partner/signUp", userAuthController.restaurantOwnerSignup);
 router.get("/search", searchController.menuSearch);
 router.get("/logout", verifyToken, userAuthController.logout);
 router.get("/cart/add/:_id", verifyToken, userCartController.addCart)
+// router.get("/cart/remove/:_id", verifyToken, userCartController.removeCart)
+router.post("/blog/comment/add", verifyToken, commentController.addComment)
 module.exports = router

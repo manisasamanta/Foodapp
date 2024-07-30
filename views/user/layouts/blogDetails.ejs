@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="blog-post">
-                    <img src="https://via.placeholder.com/600x400" alt="Post Image">
+                    <img src="<%=blog.image%>" alt="Post Image">
                     <div class="post-date"><%=moment(blog.createdAt).format('MMMM Do, YYYY')%></div>
                     <div class="post-title"><%=blog.name%></div>
                     <div class="post-excerpt"><%-blog.content%></div>
@@ -17,28 +17,21 @@
                 <!-- Comments Section -->
                 <div class="comments-section">
                     <h3 class="p-3" style="border-bottom: 1px solid black;">Comments</h3>
+                    <%for(let comment of comments){%>
                     <div class="comment">
-                        <div class="comment-author">John Doe</div>
-                        <div class="comment-date">Apr. 15th, 2022</div>
-                        <div class="comment-text">Great article! I really enjoyed it.</div>
+                        <div class="comment-author"><%=comment.user.name%></div>
+                        <div class="comment-date"><%=moment(comment.createdAt).format('MMMM Do, YYYY')%></div>
+                        <div class="comment-text"><%=comment.comment%></div>
                     </div>
-                    <div class="comment">
-                        <div class="comment-author">Jane Smith</div>
-                        <div class="comment-date">Apr. 16th, 2022</div>
-                        <div class="comment-text">Interesting perspective on Rust!</div>
-                    </div>
+                    <%}%>
 
                     <!-- Add Comment Form -->
-                    <form class="p-3" action="/blog/comment?userId=123" method="post" style="border: 1px solid black;">
-                        <div class="form-group">
-                            <label for="comment-author">Name</label>
-                            <input type="text" class="form-control" id="comment-author" value="<%=logUser.name%>" readonly>
-                        </div>
+                    <form class="p-3" action="/blog/comment/add?blogId=<%=blog._id%>" method="post" style="border: 1px solid black;">
                         <div class="form-group">
                             <label for="comment-text">Comment</label>
-                            <textarea class="form-control" id="comment-text" rows="3" placeholder="Your comment"></textarea>
+                            <textarea class="form-control" id="comment-text" rows="3" placeholder="Your comment" name="comment"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit Comment</button>
+                        <button type="submit" class="btn btn-primary">Post Comment</button>
                     </form>
                 </div>
             </div>

@@ -244,7 +244,7 @@ class UserViewController {
       const {_id}= req.params
       const blog = await Blog.findOne({_id})
       const blogsSort = await Blog.find().sort({createdAt: -1}).limit(3);
-      const comments = await BlogComment.find({blog: _id})
+      const comments = await BlogComment.find({blog: _id}).populate("user")
       res.render("user/layouts/blogDetails", {
         title: "blog",
         logUser: req.user,
