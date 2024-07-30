@@ -19,4 +19,8 @@ router.post("/category/add", verifyToken, categoryController.createCategory);
 router.post("/menu/add", upload.single("image"), verifyToken, menuController.createMenu);
 // add blog
 router.post("/blog/add", upload.single("image"), blogController.createBlog);
+
+
+
+
 module.exports = router
