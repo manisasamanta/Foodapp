@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f2f5;
+            margin: 0;
+        }
+        .feedback-form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .stars {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            direction: rtl; /* Set direction to RTL */
+            font-size: 2em; /* Ensure font size is applied correctly */
+        }
+        .stars input {
+            display: none;
+        }
+        .stars label {
+            color: #ccc;
+            cursor: pointer;
+        }
+        .stars input:checked ~ label,
+        .stars input:checked ~ label ~ label {
+            color: #f39c12;
+        }
+        textarea {
+            width: 100%;
+            height:100px;
+            margin-top: 10px;
+            padding: 2px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            resize: vertical;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <form action="">
+    <div class="feedback-form">
+        <h2>Rate your experience</h2>
+        <p>We highly value your feedback! Kindly take a moment to rate your experience and provide us with your valuable feedback.</p>
+        <div class="stars">
+            <input type="radio" id="star5" name="rating" value="5" /><label for="star5">★</label>
+            <input type="radio" id="star4" name="rating" value="4" /><label for="star4">★</label>
+            <input type="radio" id="star3" name="rating" value="3" /><label for="star3">★</label>
+            <input type="radio" id="star2" name="rating" value="2" /><label for="star2">★</label>
+            <input type="radio" id="star1" name="rating" value="1" /><label for="star1">★</label>
+        </div>
+        <textarea rows="4" placeholder="Tell us about your experience"></textarea>
+        <button type="submit">Send</button>
+    </div>
+</form>
+</body>
+</html>

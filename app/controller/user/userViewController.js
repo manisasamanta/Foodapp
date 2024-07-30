@@ -278,5 +278,21 @@ class UserViewController {
       console.log(error);
     }
   };
+
+  reviewform= async (req, res) => {
+    try {
+      res.render("user/layouts/review", {
+        title: "reviewform",
+        logUser: req.user,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+
 }
+
+
 module.exports = new UserViewController();
