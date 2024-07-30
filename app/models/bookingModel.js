@@ -3,7 +3,7 @@ const bookingSchema = new mongoose.Schema({
     date: {
         type: String,
     },
-    time: {
+    time: { 
         type: String,
     },
     persons: {

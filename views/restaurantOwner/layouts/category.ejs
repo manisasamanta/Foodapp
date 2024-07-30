@@ -81,37 +81,35 @@
               <thead class="thead-dark">
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">Menu</th>
-                  <th scope="col">Ctaegory</th>
-              
-                 
+                  <th scope="col">Name</th>
+                
                   <th scope="col">Action</th>
                 </tr>
-              </thead>
+              </thead> 
               <tbody>
                 <!--data map here -->
-               
-                  <tr>
-                    <th scope="row"></th>
-                    <td>
-                
-                    </td>
-                
-                    <td>
-              
-                    </td>
-                   
-                    <td>
-                      <a href="">
-                        <button class="btn btn-danger">delete</button>
-                      </a>
-                      <a href="">
-                        <button class="btn btn-warning"i>edit</button>
-                      </a>
+              <% for(let item of categories_this){%>
+                <tr>
+                  <th scope="row"><%= ++i%></th>
+                  <td>
+                   <%=item.name%>
+                  </td>
+            
+                 
+                  <td>
+                    <a href="">
+                      <button class="btn btn-danger">delete</button>
+                    </a>
+                    <a href="">
+                      <button class="btn btn-warning"i>edit</button>
+                    </a>
 
-                    </td>
+                  </td>
 
-                  </tr>
+                </tr>
+
+              <%}%>
+                
                 
 
 
@@ -122,8 +120,8 @@
                 <thead class="thead-dark">
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Menu</th>
-                    <th scope="col">Ctaegory</th>
+                    <th scope="col"> Name</th>
+                   
                 
                    
                     <th scope="col">Action</th>
@@ -131,19 +129,16 @@
                 </thead>
                 <tbody>
                   <!--data map here -->
-                 
+                  <% for(let item of categories_all){%>
                     <tr>
-                      <th scope="row"></th>
+                      <th scope="row"><%= ++j%></th>
                       <td>
-                  
+                        <%=item.name%>
                       </td>
-                  
-                      <td>
-                
-                      </td>
+                   
                      
                       <td>
-                        <a href="">
+                        <a href="/restaurantOwner/category/delete/<%=item._id%>">
                           <button class="btn btn-danger">delete</button>
                         </a>
                         <a href="">
@@ -153,7 +148,8 @@
                       </td>
   
                     </tr>
-                  
+                    <%}%>
+                
   
   
                 </tbody>

@@ -3,7 +3,7 @@ const categoryModel = require("../../../models/categoryModel");
 const restaurantModel = require("../../../models/restaurantModel");
 const fs = require("fs")
 class CRUDMenuController {
-    createMenu = async (req, res) => {
+    createMenu = async (req, res) => { 
         try{
             const restaurant = await restaurantModel.findOne({owner: req.user.id})
             if(!restaurant){
