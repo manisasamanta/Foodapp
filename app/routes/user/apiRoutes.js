@@ -14,4 +14,5 @@ router.get("/logout", verifyToken, userAuthController.logout);
 router.get("/cart/add/:_id", verifyToken, userCartController.addCart)
 router.get("/cart/remove/:_id", verifyToken, userCartController.removeCart)
 router.post("/blog/comment/add", verifyToken, commentController.addComment)
+router.get("/blog/search", searchController.blogSearch)
 module.exports = router
