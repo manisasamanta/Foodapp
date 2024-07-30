@@ -1,7 +1,9 @@
+
 const orderModel = require("../../models/orderModel");
 const restaurantModel = require("../../models/restaurantModel");
 const reviewModel = require("../../models/reviewModel");
 const userModel = require("../../models/userModel");
+const carousalModel = require('../../models/carousalModel');
 
 class AdminViewController {
   login = async (req, res) => {
@@ -114,7 +116,47 @@ class AdminViewController {
  
    }
 
+   carousaldata=async(req,res)=>{
+    try{
+      const data=await carousalModel.find()
+      console.log(data);
 
+      res.render('admin/layouts/AllCarousal',{
+        title:'home page',
+        data:data,
+        logUser: req.user
+        
+      })
+
+    }catch(err){
+console.log(err);
+    }
+   }
+
+
+   carousalForm=async(req,res)=>{
+    res.render('admin/layouts/Addcarousal',{
+      title:'add carousal page',
+      logUser: req.user
+    })
+   }
+
+
+   editCarousalForm=async(req,res)=>{
+    const id=req.params.id
+    const eduser=await carousalModel.findById(id)
+   
+
+    if(eduser){
+      res.render('admin/layouts/EditCarousal',{
+        title:'restaurant edit',
+        logUser: req.user,
+        e:eduser
+  
+      })
+    }
+ 
+   }
 
 
 }

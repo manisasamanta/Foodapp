@@ -10,7 +10,16 @@ router.get('/restaurant', verifyToken, checkRoleAdmin, adminViewController.allRe
 router.get('/user', verifyToken, checkRoleAdmin, adminViewController.Alluser)
 router.get('/editform/restaurant/:id',verifyToken,adminViewController.editrestaurantForm)
 
+// carousal table
 
+router.get('/all/acrousal',verifyToken,adminViewController.carousaldata)
+// carousal form
+
+router.get('/carousal/form',verifyToken,adminViewController.carousalForm)
+
+// edit form carousal
+
+router.get('/edit/carousal/:id',verifyToken,adminViewController.editCarousalForm)
 
 
 module.exports = router

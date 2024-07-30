@@ -13,11 +13,12 @@
                         <i class="fa fa-user" style="font-size: 50px;"></i>
                     </div>
                     <!-- <h5>User Name</h5> -->
-                    <button class="btn btn-primary">Edit Profile</button>
+                  <a href="/edit/form/profile"><button class="btn btn-primary">Edit Profile</button></a>  
                     <hr>
-                    <p><strong>NAME:</strong> John Doe</p>
-                    <p><strong>PHONE:</strong> (123) 456-7890</p>
-                    <p><strong>EMAIL:</strong> johndoe@example.com</p>
+
+                    <p><strong>NAME:</strong><%=data.name%> </p>
+                    <p><strong>PHONE:</strong><%= data.phone%></p>
+                    <p><strong>EMAIL:</strong> <%= data.email%></p>
                 </div>
             </div>
             <div class="col-lg-8">
@@ -25,7 +26,7 @@
                     <div class="col-md-6">
                         <div class="info-card bg-warning text-dark">
                             <h6>Table Bookings: <span class="float-right">0</span></h6>
-                            <h6>Total Orders: <span class="float-right">0</span></h6>
+                            <h6>Total Orders: <span class="float-right"><%= orderdat%></h6>
                             <h6>Total Cart Items: <span class="float-right">0</span></h6>
                         </div>
                     </div>

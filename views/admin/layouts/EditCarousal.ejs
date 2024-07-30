@@ -59,28 +59,17 @@
 
                     <!-- Main content -->
                     <section class="content p-4">
-                        <h1 class="text-center">Edit restaurant</h1>
-                        <form action="/admin/restaurant/edit/<%= e._id%>" method=post enctype="multipart/form-data">
+                        <h1 class="text-center">Edit Carousal</h1>
+                        <form action="/admin/update/carousal/<%= e._id%>" method=post >
                             <div class="mb-3">
-                                <label for="name" class="form-label"> Name</label>
-                                <input type="text" class="form-control" value="<%=e.name%> " id="name" name="name">
+                                <label  class="form-label"> Title</label>
+                                <input type="text" class="form-control" value="<%=e.title%> " id="name" name="title">
                             </div>
                             <div class="mb-3">
-                                <label for="description" class="form-label">Description</label>
+                                <label class="form-label">Description</label>
                                 <input type="text" class="form-control" id="name" value="<%=e.description%>" name="description">
                             </div>
-                            <div class="mb-3">
-                                <label for="address" class="form-label">address</label>
-                                <input type="text" class="form-control" id="name" value="<%= e.address%>" name="address">
-                            </div>
-                            <div class="mb-3">
-                                <label for="address" class="form-label">openingTime</label>
-                                <input type="text" class="form-control" id="name" value="<%= e.openingTime%>" name="openingTime">
-                            </div>
-                            <div class="mb-3">
-                                <label for="address" class="form-label">Closing Time</label>
-                                <input type="text" class="form-control" id="name" value="<%= e.closingTime%>" name="closingTime">
-                            </div>
+                           
                            
                             <button type="submit" class="btn btn-primary w-100 mt-2" id="submit-btn">Submit</button>
                         </form>

@@ -17,4 +17,6 @@ router.get('/blog', verifyToken, userViewController.blog)
 router.get('/blog/:_id', verifyToken, userViewController.blogDetail)
 router.get('/profile', verifyToken, userViewController.profile)
 router.get('/restaurant', verifyToken, userViewController.restaurant)
+// edit profile form
+router.get('/edit/form/profile',verifyToken,userViewController.editForm)
 module.exports = router

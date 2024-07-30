@@ -6,30 +6,27 @@ class crudrestaurantController{
 
     updateRestaurant=async(req,res)=>{
         try {
-            const { ObjectId } = req.params;
+            const {_id} = req.params;
     
-            // Validate if id is a valid ObjectId
-            if (!mongoose.Types.ObjectId.isValid(ObjectId)) {
-                console.log('Invalid ID format:', ObjectId);
-                req.flash("error", "Invalid restaurant ID format");
-                return res.redirect('/admin/restaurant');
-            }
+       
     
-            console.log("Request Params:", req.params);
+           console.log(_id);
     
             // Destructure request body
-            const { name, description, address, openingTime, closingTime } = req.body;
+            const { name, description, address, openingTime, closingTime }= req.body;
+
+            console.log(req.body);
     
             // Find and update the restaurant
             const updatedRestaurant = await restaurantModel.findByIdAndUpdate(
-                ObjectId,
+                _id,
                 { name, description, address, openingTime, closingTime },
                 { new: true, runValidators: true } // Return the updated document and run validators
             );
     
             // If the restaurant was not found
             if (!updatedRestaurant) {
-                console.log('Restaurant not found for ID:', id);
+                console.log('Restaurant not found for ID:', _id);
                 req.flash("error", "Restaurant not found");
                 return res.redirect('/admin/restaurant');
             }

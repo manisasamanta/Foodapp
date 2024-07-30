@@ -8,6 +8,10 @@ const BlogComment = require("../../models/blogCommentModel");
 const Restaurant = require("../../models/restaurantModel");
 const Order = require("../../models/orderModel");
 const Cart = require("../../models/addToCartModel");
+const userModel = require("../../models/userModel");
+const Carousal = require("../../models/carousalModel");
+const carousalModel = require("../../models/carousalModel");
+const orderModel = require("../../models/orderModel");
 class UserViewController {
   verify = async (req, res) => {
     try {
@@ -65,7 +69,10 @@ class UserViewController {
 
   home = async (req, res) => {
     try {
-      const menus = await Menu.find();
+      const menus = await Menu.find().populate("restaurant").limit(3);
+      const carousal = await carousalModel.find()
+    
+     
       const reviews = await Review.aggregate([
         {
           $lookup: {
@@ -73,6 +80,8 @@ class UserViewController {
             localField: "user",
             foreignField: "_id",
             as: "user",
+           
+
           },
         },
         {
@@ -88,7 +97,8 @@ class UserViewController {
         title: "home",
         logUser: req.user,
         menuData: menus,
-        reviewData: reviews
+        reviewData: reviews,
+        cardata: carousal
       });
     } catch (error) {
       console.log(error);
@@ -270,13 +280,34 @@ class UserViewController {
   };
   profile= async (req, res) => {
     try {
+      const data=await userModel.findById(req.user.id)
+    
+      const orders=await orderModel.find()
+
       res.render("user/layouts/profile", {
         title: "profile",
         logUser: req.user,
+        data:data,
+        orderdat:orders.length
       });
     } catch (error) {
       console.log(error);
     }
   };
+
+  editForm=async(req,res)=>{
+    try{ 
+      const data=await userModel.findById(req.user.id)
+
+      res.render('user/layouts/EditProfile',{
+        title:'update profile page',
+        logUser: req.user,
+        data
+      })
+
+    }catch(err){
+      console.log(error);
+    }
+  }
 }
 module.exports = new UserViewController();
