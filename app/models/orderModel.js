@@ -12,6 +12,9 @@ const orderSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Menu",
     },
+    quantity: {
+        type: Number,
+    },
     orderStatus: {
         type: String,
         enum: ["Pending", "Confirmed", "Cancelled"],

@@ -294,20 +294,5 @@ class UserViewController {
       console.log(error);
     }
   };
-
-  editForm=async(req,res)=>{
-    try{ 
-      const data=await userModel.findById(req.user.id)
-
-      res.render('user/layouts/EditProfile',{
-        title:'update profile page',
-        logUser: req.user,
-        data
-      })
-
-    }catch(err){
-      console.log(error);
-    }
-  }
 }
 module.exports = new UserViewController();
