@@ -23,17 +23,21 @@
             </tr>
         </thead>
         <tbody>
-          <%for(let i of cartData.cart){%>
-            <tr>
-                
-                  <td><img src="<%=i.menu.image%>" alt="Pizza" style="width: 50px;"></td>
-                <td><%=i.menu.name %></td>
-                <td>$<%=i.menu.price %></td>
-                <td><%=i.menu.restaurant.name%></td>
-                <td><span class ="d-flex justify-content-center"><button class="btn btn-secondary position-relative" style="border-radius: 0;">-</button><div class="p-2" style="border: 1px solid black; width: 50px; height: 50px; text-align: center;"><%=i.count%></div><button class="btn btn-secondary position-relative" style="border-radius: 0;">+</button></span></td>
-                <td><a href="/order?menu=<%=i.menu._id%>&restaurant=<%=i.menu.restaurant._id%>"><button class="buy-now">Buy Now</button></a></td>
-
-            </tr>
+          <%if(cartData){%>
+            <%for(let i of cartData.cart){%>
+              <tr>
+                  
+                    <td><img src="<%=i.menu.image%>" alt="Pizza" style="width: 50px;"></td>
+                  <td><%=i.menu.name %></td>
+                  <td>$<%=i.menu.price %></td>
+                  <td><%=i.menu.restaurant.name%></td>
+                  <td><span class ="d-flex justify-content-center"><a href="/cart/remove/<%=i.menu._id%>"><button class="btn btn-secondary position-relative" style="border-radius: 0;">-</button></a><div class="p-2" style="border: 1px solid black; width: 50px; height: 50px; text-align: center;"><%=i.count%></div><a href="/cart/add/<%=i.menu._id%>"><button class="btn btn-secondary position-relative" style="border-radius: 0;">+</button></a></span></td>
+                  <td><a href="/order?menu=<%=i.menu._id%>&restaurant=<%=i.menu.restaurant._id%>"><button class="buy-now">Buy Now</button></a></td>
+  
+              </tr>
+              <%}%>
+            <%}else{%>
+              <h1>No Menu Found</h1>
             <%}%>
   
         </tbody>
