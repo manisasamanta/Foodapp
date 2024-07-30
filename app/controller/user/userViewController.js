@@ -282,13 +282,18 @@ class UserViewController {
     try {
       const data=await userModel.findById(req.user.id)
     
-      const orders=await orderModel.find()
+      const orders = await orderModel.findById(req.user.id ); // Use find instead of findById
+      const orderCount = orders ? orders.length : 0;
+
+     
+      
+   
 
       res.render("user/layouts/profile", {
         title: "profile",
         logUser: req.user,
         data:data,
-        orderdat:orders.length
+        orderdat:orderCount
       });
     } catch (error) {
       console.log(error);
