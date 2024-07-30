@@ -75,6 +75,7 @@
                   <th scope="col">#</th>
                   <th scope="col">User Name</th>
                   <th scope="col">Menu</th>
+                  <th scope="col">Quantity</th>
                   <th scope="col">Order Status</th>
               
                  
@@ -85,7 +86,7 @@
                 <!--data map here -->
                 <% for(let item of odata){%>
                   <tr>
-                    <th scope="row"></th>
+                    <th scope="row"><%=++i%></th>
                     <td>
                       <%= item.user.name%>
                     </td>
@@ -95,15 +96,19 @@
                     </td>
 
                     <td>
-              
+                      <%= item.quantity%>
+                    </td>
+
+                    <td>
+                      <%= item.orderStatus%>
                     </td>
                    
-                    <td>
-                      <a href="">
+                    <td> 
+                      <a href="/restaurantOwner/order/Confirmed/<%= item._id %>/<%= item.user.email%>">
                         <button class="btn btn-success">Confirm</button>
                       </a>
-                      <a href="">
-                        <button class="btn btn-danger"i>Cancel</button>
+                      <a href="/restaurantOwner/order/Cancelled/<%= item._id %>/<%= item.user.email%>">
+                        <button class="btn btn-danger">Cancel</button>
                       </a>
 
                     </td>

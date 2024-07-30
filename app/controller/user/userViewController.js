@@ -10,7 +10,7 @@ const Order = require("../../models/orderModel");
 const Cart = require("../../models/addToCartModel");
 const userModel = require("../../models/userModel");
 const Carousal = require("../../models/carousalModel");
-const carousalModel = require("../../models/carousalModel");
+// const carousalModel = require("../../models/carousalModel");
 const orderModel = require("../../models/orderModel");
 class UserViewController {
   verify = async (req, res) => {
@@ -70,7 +70,7 @@ class UserViewController {
   home = async (req, res) => {
     try {
       const menus = await Menu.find().populate("restaurant").limit(3);
-      const carousal = await carousalModel.find()
+      const carousal = await Carousal.find()
     
      
       const reviews = await Review.aggregate([
@@ -98,7 +98,8 @@ class UserViewController {
         logUser: req.user,
         menuData: menus,
         reviewData: reviews,
-        cardata: carousal
+        carDataActive: carousal[0],
+        carDataInactive: carousal.slice(1),
       });
     } catch (error) {
       console.log(error);
@@ -214,6 +215,7 @@ class UserViewController {
           path: "restaurant",
         }
       });
+      console.log(cart)
       res.render("user/layouts/cart", {
         title: "cart",
         logUser: req.user,

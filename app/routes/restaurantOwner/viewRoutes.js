@@ -1,6 +1,7 @@
 const express = require("express");
 const restaurantOwnerViewController = require("../../controller/restaurantOwner/restaurantOwnerViewController");
 const { verifyToken, checkRoleRestaurantOwner } = require("../../middleware/auth");
+const orderStatusController = require("../../controller/restaurantOwner/apiController/orderStatusController");
 const router = express.Router();
 router.get('/', restaurantOwnerViewController.login)
 router.get('/dashboard', verifyToken, checkRoleRestaurantOwner, restaurantOwnerViewController.dashboard)
@@ -11,7 +12,7 @@ router.get('/category', verifyToken, checkRoleRestaurantOwner, restaurantOwnerVi
 router.get('/category/delete/:id', verifyToken, checkRoleRestaurantOwner, restaurantOwnerViewController.deleteCategory)
 router.get('/category/add', verifyToken, checkRoleRestaurantOwner, restaurantOwnerViewController.addCategory)
 
-//menu
+//menu 
 router.get('/menu/add', verifyToken, checkRoleRestaurantOwner, restaurantOwnerViewController.addMenu)
 router.get('/menu', verifyToken, checkRoleRestaurantOwner, restaurantOwnerViewController.menu)
 
@@ -22,9 +23,15 @@ router.get('/review', verifyToken, checkRoleRestaurantOwner, restaurantOwnerView
 router.get('/booking', verifyToken, checkRoleRestaurantOwner, restaurantOwnerViewController.booking)
 router.get('/booking/update', verifyToken, checkRoleRestaurantOwner, restaurantOwnerViewController.updateBooking)
 
+//order
 router.get('/order', verifyToken, checkRoleRestaurantOwner, restaurantOwnerViewController.order)
 router.get('/order/update', verifyToken, checkRoleRestaurantOwner, restaurantOwnerViewController.updateOrder)
+
+router.get('/order/:orderStatus/:id/:email',orderStatusController.updateOrderStatus);
+
+//blog
 router.get('/blog', verifyToken, checkRoleRestaurantOwner, restaurantOwnerViewController.blog)
 router.get('/blog/add', verifyToken, checkRoleRestaurantOwner, restaurantOwnerViewController.blogAdd)
 // router.get('/order', restaurantOwnerViewController.order)
+
 module.exports = router

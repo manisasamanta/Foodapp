@@ -30,11 +30,7 @@
                         <i class="fa fa-star" style="color:bisque;"></i>
                         <i class="fa fa-star" style="color:bisque;"></i>
                         <i class="fa fa-star"></i>
-                        <span>(<%const count=0%>
-                            <%for(let j of i.reviews){%>
-                        <%count=count+j.rating%>
-                        <%}%>
-                        <%=count/i.reviews.length ||0%> )</span>
+                        
                     </span>
                     </div>
                     <a href="/menu?restaurant=<%=i._id%>" class="menu-btn">MENU</a>

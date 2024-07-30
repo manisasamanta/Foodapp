@@ -20,14 +20,16 @@
             </div>
             <div class="col-lg-4">
                 <!-- Search bar -->
+                 <form  action="/blog/search" method="get">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Search Blogs ...">
+                    <input type="text" class="form-control" placeholder="Search Blogs ..." name="query">
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button">
+                        <button class="btn btn-outline-secondary" type="submit">
                             <i class="fa fa-search"></i>
                         </button>
                     </div>
                 </div>
+            </form>
                 <div class="recent-posts text-dark p-2 h3" style="border-bottom: 1px solid black">Recent Posts</div>
                 <!-- blog post -->
                 <%for(let i of recent){%>
