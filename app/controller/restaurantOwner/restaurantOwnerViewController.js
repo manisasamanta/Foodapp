@@ -116,7 +116,8 @@ addCategory = async (req, res) => {
     }
     res.render("restaurantOwner/layouts/AddMenu", {
       title: "Add restaurant Form",
-      logUser: req.user
+      logUser: req.user,
+      categories
     });
   };
   
