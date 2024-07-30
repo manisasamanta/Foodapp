@@ -5,7 +5,7 @@ class CRUDCategoryController {
         try{
             const restaurant = await restaurantModel.findOne({owner: req.user.id})
             if(!restaurant){
-                req.flash("error", "Please create restaurant first")
+                req.flash("error", "Please create restaurant first") 
                 return res.redirect("/restaurantOwner/restaurant/add")
             }
             const {name} = req.body
@@ -31,6 +31,8 @@ class CRUDCategoryController {
             })
         }
     } 
+
+    
 
     
 }

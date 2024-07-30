@@ -3,6 +3,7 @@ const categoryModel = require("../../models/categoryModel");
 const menuItemModel = require("../../models/menuItemModel");
 const blogModel = require("../../models/blogModel");
 const reviewModel = require("../../models/reviewModel");
+const orderModel = require("../../models/orderModel");
 class RestaurantOwnerViewController {
   login = async (req, res) => {
     try {
@@ -28,18 +29,23 @@ class RestaurantOwnerViewController {
       logUser: req.user,
     });
   };
+//categories --------------
 
   getCategories = async (req, res) => {
     try{
         const restaurant = await restaurantModel.findOne({owner: req.user.id})
+
         if(!restaurant) return res.redirect("/restaurantOwner/restaurant/add")
+
         const thisCategories = await categoryModel.find({restaurant: restaurant._id})
         const othersCategories = await categoryModel.find({restaurant: {$ne: restaurant._id}})
         return res.render("restaurantOwner/layouts/Category", {
             title: "Restaurant Category",
             logUser: req.user,
             categories_this: thisCategories, // categories created by this restaurant. // 1st table show this data
-            categories_all: othersCategories // all categories by other restaurants. // 2nd table show this data
+            categories_all: othersCategories ,// all categories by other restaurants. // 2nd table show this data
+            i:0,
+            j:0
         })
     }catch(err){
         return res.status(500).json({
@@ -48,20 +54,55 @@ class RestaurantOwnerViewController {
         })
     }
 }
+
+ deleteCategory = async (req, res) => {
+  try {
+      const id = req.params.id;
+
+      // Find and delete the category
+      const category = await categoryModel.findById({_id:id});
+      console.log('kk',category);
+      // Check if the category is associated with the restaurant
+      const restaurant = await restaurantModel.findOne({ owner: req.user.id });
+
+      // Remove the category
+      await category.remove();
+
+      req.flash("success", "Category deleted successfully.");
+      return res.redirect("/restaurantOwner/category");
+  } catch (err) {
+      return res.status(500).json({
+          success: false,
+          message: err.message
+      });
+  }
+};
+
+
+
 addCategory = async (req, res) => {
     const restaurant = await restaurantModel.findOne({owner: req.user.id})
     if(!restaurant) return res.redirect("/restaurantOwner/restaurant/add")
     res.render("restaurantOwner/layouts/AddCategory", {
       title: "Add restaurant Form",
       logUser: req.user,
+
     });
 }
+
+//menu-----------------------------------
+
   menu = async (req, res) => {
     const restaurant = await restaurantModel.findOne({owner: req.user.id})
     if(!restaurant) return res.redirect("/restaurantOwner/restaurant/add")
+
+      const menu = await menuItemModel.find().populate('category')
+
     res.render("restaurantOwner/layouts/Menu", {
       title: "Restaurant dashboard",
       logUser: req.user,
+      mdata : menu,
+      i:0
     });
   };
 
@@ -75,11 +116,11 @@ addCategory = async (req, res) => {
     }
     res.render("restaurantOwner/layouts/AddMenu", {
       title: "Add restaurant Form",
-      logUser: req.user,
-      categories
+      logUser: req.user
     });
   };
   
+
   review = async (req, res) => {
     const restaurant = await restaurantModel.findOne({owner: req.user.id})
     if(!restaurant) return res.redirect("/restaurantOwner/restaurant/add")
@@ -105,14 +146,23 @@ addCategory = async (req, res) => {
       logUser: req.user
     });
   }
+
+  //order ---------------------------------
+
+  
   order = async (req, res) => {
     const restaurant = await restaurantModel.findOne({owner: req.user.id})
     if(!restaurant) return res.redirect("/restaurantOwner/restaurant/add")
+
+    const order = await orderModel.find().populate('user','menu')
     res.render("restaurantOwner/layouts/Order", {
       title: "Order",
-      logUser: req.user
+      logUser: req.user,
+      odata : order,
+      i:0
     });
   }
+
   updateOrder = async (req, res) => {
     const restaurant = await restaurantModel.findOne({owner: req.user.id})
     if(!restaurant) return res.redirect("/restaurantOwner/restaurant/add")
@@ -121,12 +171,18 @@ addCategory = async (req, res) => {
       logUser: req.user
     });
   }
+
+  // blog --------------------------------------------------------
+
   blog = async (req, res) => {
     const restaurant = await restaurantModel.findOne({owner: req.user.id})
     if(!restaurant) return res.redirect("/restaurantOwner/restaurant/add")
+
+      const Blog = await blogModel.find()
     res.render("restaurantOwner/layouts/Blog", {
       title: "Restaurant dashboard",
-      logUser: req.user
+      logUser: req.user,
+      bdata:Blog
     });
   };
   blogAdd = async (req, res) => {

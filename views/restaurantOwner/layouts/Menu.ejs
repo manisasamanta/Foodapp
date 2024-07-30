@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head> 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title><%= title %></title>
@@ -78,11 +78,14 @@
               </a><br><br>
 
             <table class="table">
-              <thead class="thead-dark">
+              <thead class="thead-dark"> 
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">Menu</th>
-                  <th scope="col">Ctaegory</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Image</th>
+                  <th scope="col">Category</th>
               
                  
                   <th scope="col">Action</th>
@@ -90,15 +93,27 @@
               </thead>
               <tbody>
                 <!--data map here -->
-               
+                <% for(let item of mdata){%>
                   <tr>
-                    <th scope="row"></th>
+                    <th scope="row"><%= ++i%></th>
                     <td>
-                
+                      <%= item.name%>
                     </td>
-                
+                    
                     <td>
-              
+                      <%= item.description%>
+                    </td>
+                     
+                    <td>
+                      <%= item.price%>
+                    </td>
+
+                    <td>
+                      <img src="<%= item.image%>" alt="" height="100px" width="100px">
+                    </td>
+
+                    <td>
+                      <%= item.category.name%>
                     </td>
                    
                     <td>
@@ -112,7 +127,7 @@
                     </td>
 
                   </tr>
-                
+                  <%}%>
 
 
               </tbody>

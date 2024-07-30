@@ -19,7 +19,7 @@ const menuSchema = new mongoose.Schema({
     restaurant: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Restaurant",
-    },
+    }, 
 }, {
     timestamps: true,
     versionKey: false
