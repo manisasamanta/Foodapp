@@ -60,8 +60,10 @@ class CartController {
                 const index = cart.cart.findIndex((item) => item.menu == menu);
                 if(index > -1) {
                     cart.cart[index].count = cart.cart[index].count - 1
-                } else {
-                    cart.cart.push({menu, count: 1});
+                    if (cart.cart[index].count === 0) {
+                        cart.cart.splice(index, 1); // remove the item from the cart
+                      }
+              
                 }
                 await cart.save();
             }else{
