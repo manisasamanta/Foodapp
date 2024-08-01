@@ -13,14 +13,16 @@
       </div>
 
       <ul class="filters_menu">
+        <%if(categories){%>
         <a href="/menu" style="color: inherit;"><li class="" data-filter="*">All</li></a>
         <%for(let i of categories){%>
           <a href="/menu?category=<%=i._id%>" style="color: inherit;"><li class="" data-filter="*"><%=i.name%></li></a>
-        <%}%>
+        <%}}%>
       </ul>
 
       <div class="filters-content">
         <div class="row grid">
+          <%if(menuData){%>
           <%for(let i of menuData){%>
           <div class="col-sm-6 col-lg-4 all pizza">
             <div class="box">
@@ -101,7 +103,7 @@
               </div>
             </div>
           </div>
-          <%}%>
+          <%}}%>
         </div>
       </div>
       <div class="btn-box">

@@ -4,6 +4,9 @@ const mongoose = require("mongoose");
 class OrderController {
     addOrder = async (req, res) => {
         try {
+            if(!req.user || !req.query.menu || !req.query.count || !req.query.restaurant) {
+                return res.redirect('/cart');
+            }
             const order = new Order({
                 user: req.user.id,
                 menu: req.query.menu,
@@ -16,7 +19,7 @@ class OrderController {
                 { user: (req.user.id) },
                 { $pull: { cart: { menu: new mongoose.Types.ObjectId(req.query.menu) } } }
               );
-              return res.redirect("/cart")
+              return res.redirect("/orders")
         } catch (error) {
             res.status(500).json({
                 success: false,

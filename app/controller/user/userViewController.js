@@ -12,6 +12,7 @@ const userModel = require("../../models/userModel");
 const Carousal = require("../../models/carousalModel");
 // const carousalModel = require("../../models/carousalModel");
 const orderModel = require("../../models/orderModel");
+const mongoose = require("mongoose");
 class UserViewController {
   verify = async (req, res) => {
     try {
@@ -75,14 +76,12 @@ class UserViewController {
      
       const reviews = await Review.aggregate([
         {
-          $lookup: {
-            from: "users",
-            localField: "user",
+          $lookup:{
+            from: "menus",
+            localField: "menu",
             foreignField: "_id",
-            as: "user",
-           
-
-          },
+            as: "menu",
+          }
         },
         {
           $lookup: {
@@ -91,7 +90,17 @@ class UserViewController {
             foreignField: "_id",
             as: "restaurant",
           }
-        }
+        },
+        {
+          $unwind: "$user"
+        },
+        {
+          $unwind: "$restaurant"
+        },
+        {
+          $unwind: "$menu"
+        },
+
       ])
       res.render("user/layouts/home", {
         title: "home",
@@ -215,7 +224,7 @@ class UserViewController {
           path: "restaurant",
         }
       });
-      console.log(cart)
+      // console.log(cart)
       res.render("user/layouts/cart", {
         title: "cart",
         logUser: req.user,
@@ -283,19 +292,68 @@ class UserViewController {
   profile= async (req, res) => {
     try {
       const data=await userModel.findById(req.user.id)
-    
-      const orders = await orderModel.findById(req.user.id ); // Use find instead of findById
-      const orderCount = orders ? orders.length : 0;
-
-     
-      
-   
-
+      const order = await Order.find({ user: req.user.id }).populate("menu");
+      console.log(order)
+      const cart = await Cart.find({ user: req.user.id });
       res.render("user/layouts/profile", {
         title: "profile",
         logUser: req.user,
         data:data,
-        orderdat:orderCount
+        orderdata:order,
+        pending:order.filter((order) => order.orderStatus === "Pending"),
+        confirmed:order.filter((order) => order.orderStatus === "Confirmed"),
+        canceled:order.filter((order) => order.orderStatus === "Cancelled"),
+        cartdata:cart,
+        totalSpendings: order.reduce((acc, order) => acc + (order.menu.price * order.quantity), 0),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  orders = async (req, res) => {
+    try {
+      const orders = await Order.aggregate([
+        {
+          $match: {
+            user: new mongoose.Types.ObjectId(req.user.id), 
+            }
+        },
+        
+        {
+          $lookup: {
+            from: "menus",
+            localField: "menu",
+            foreignField: "_id",
+            as: "menuData",
+          },
+        },
+        {
+          $lookup: {
+            from: "restaurants",
+            localField: "restaurant",
+            foreignField: "_id",
+            as: "restaurantData",
+          },
+        },
+      ]); 
+      console.log(orders)
+      // return res.json({orders})
+      res.render("user/layouts/order", {
+        title: "orders",
+        logUser: req.user,
+        orderData: orders
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  editProfile = async (req, res) => {
+    try {
+      const data=await userModel.findById(req.user.id)
+      res.render("user/layouts/EditProfile", {
+        title: "editProfile",
+        logUser: req.user,
+        data
       });
     } catch (error) {
       console.log(error);

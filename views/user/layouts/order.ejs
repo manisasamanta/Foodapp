@@ -1,0 +1,68 @@
+
+<%-include('../partials/header')%>
+    <!-- end header section -->
+  </div>
+
+  <!-- book section -->
+  <section class="book_section layout_padding">
+    <div class="container">
+      <div class="text-center">
+        <h2>
+          Your Order Items
+        </h2>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>Sl No</th>
+              <th>Item</th>
+              <th>Restuarant</th>
+              <th>Quantity</th>
+              <th>Price (x Quantity)</th>
+              <th>Status</th>
+              <th>Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%let count=1%>
+            <%if(orderData){%>
+            <%for(let order of orderData){ %>
+              <tr>
+                <td><%=count++%></td>
+                <td><%for(let menu of order.menuData){%>
+                    <%= menu.name%>
+                    <%}%>
+                </td>
+                <td><%for(let restaurant of order.restaurantData){%>
+                    <%= restaurant.name%>
+                    <%}%>
+                </td>
+                <td><%= order.quantity %></td>
+                <td><%for(let menu of order.menuData){%>
+                    <%= menu.price * order.quantity%>
+                    <%}%>
+                </td>
+                <td><%= order.orderStatus %></td>
+                <td><%-moment(order.createdAt).format('ddd, MMM. DD YYYY') %></td>
+              </tr>
+            <% }}%>
+          </tbody>
+        </table>
+      </div>
+      
+  </section>
+  <!-- end book section -->
+
+ <!-- footer section -->
+ <%-include('../partials/footer')%>
+
+ <!-- footer section -->
+
+ <%-include('../partials/script')%>
+
+  
+
+</body>
+
+</html>

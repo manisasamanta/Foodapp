@@ -66,10 +66,14 @@ class CartController {
               
                 }
                 await cart.save();
-            }else{
-                // remove
-                const removeCart = AddToCart.findOneAndRemove({user: id});   
+                if(cart.cart.length === 0) {
+                       await AddToCart.findOneAndDelete({user: id});   
+                    }
             }
+            // else{
+            //     // remove
+            //     const removeCart = AddToCart.findOneAndRemove({user: id});   
+            // }
             return res.redirect('/cart');
         } catch (error) {
             return res.status(500).json({
