@@ -8,9 +8,16 @@ const orderSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Restaurant",
     }, 
+<<<<<<< HEAD
     menu : {
+=======
+    menu : { 
+>>>>>>> a6ee1e6602b4b1c205712ab0f16ca5593ea389ce
         type: mongoose.Schema.Types.ObjectId,
         ref: "Menu",
+    },
+    quantity: {
+        type: Number,
     },
     orderStatus: {
         type: String,

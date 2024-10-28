@@ -1,11 +1,13 @@
-const mongoose= require("mongoose");
-
-const carousalSchema = new mongoose.Schema({
+const mongoose = require("mongoose");
+const CarousalSchema = new mongoose.Schema({
     title: {
-        type: String    
+        type: String,
     },
     description: {
-        type: String
+        type: String,
     },
-})
-module.exports = mongoose.model("carousal", carousalSchema)
+}, {
+    timestamps: true,
+    versionKey: false
+});
+module.exports = mongoose.model("Carousal", CarousalSchema)

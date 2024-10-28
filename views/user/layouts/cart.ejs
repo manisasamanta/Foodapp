@@ -17,28 +17,27 @@
                 <th>Image</th>
                 <th>Menu Name</th>
                 <th>Price</th>
-                <th>Quantity</th>
                 <th>Restuarant Name</th>
+                <th>Quantity</th>
                 <th>Add to cart</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td><img src="images/f1.png" alt="Pizza" style="width: 50px;"></td>
-                <td>Delicious Pizza</td>
-                <td>$20.00</td>
-                <td>Aminia</td>
-                <td><input type="number" value="1" min="1" max="10" style="width: 40px;"></td>
-                <td><button class="buy-now">Buy Now</button></td>
-            </tr>
-            <tr>
-                <td><img src="images/f2.png" alt="Burger" style="width: 50px;"></td>
-                <td>Delicious Burger</td>
-                <td>$16.00</td>
-                <td>arsalan</td>
-                <td><input type="number" value="1"min="1" max="10" style="width: 40px;"></td>
-                <td><button class="buy-now">Buy Now</button></td>
-            </tr>
+          <%if(cartData){%>
+            <%for(let i of cartData.cart){%>
+              <tr>
+                  
+                    <td><img src="<%=i.menu.image%>" alt="Pizza" style="width: 50px;"></td>
+                  <td><%=i.menu.name %></td>
+                  <td>$<%=i.menu.price %></td>
+                  <td><%=i.menu.restaurant.name%></td>
+                  <td><span class ="d-flex justify-content-center"><a href="/cart/remove/<%=i.menu._id%>"><button class="btn btn-secondary position-relative" style="border-radius: 0;">-</button></a><div class="p-2" style="border: 1px solid black; width: 50px; height: 50px; text-align: center;"><%=i.count%></div><a href="/cart/add/<%=i.menu._id%>"><button class="btn btn-secondary position-relative" style="border-radius: 0;">+</button></a></span></td>
+                  <td><a href="/order?menu=<%=i.menu._id%>&count=<%=i.count%>&restaurant=<%=i.menu.restaurant._id%>"><button class="buy-now">Buy Now</button></a></td>
+  
+              </tr>
+              <%}%>
+            <%}%>
+  
         </tbody>
     </table>
     </div>

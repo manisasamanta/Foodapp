@@ -8,6 +8,8 @@ const flash = require("express-flash");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const connectDb = require("./app/config/dbConnetion");
+const truncateHtml = require("truncate-html");
+const moment = require("moment");
 // import routes
 const userApiRoutes = require("./app/routes/user/apiRoutes");
 const userViewRoutes = require("./app/routes/user/viewRoutes");
@@ -53,3 +55,9 @@ const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log("Server started on port " + `http://localhost:${PORT}`);
 });
+truncateHtml.setup({
+  stripTags: true, 
+  length: 300
+})
+app.locals.truncateHtml = truncateHtml
+app.locals.moment = moment

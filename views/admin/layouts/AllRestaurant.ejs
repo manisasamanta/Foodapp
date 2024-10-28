@@ -44,7 +44,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Restaurants</h1>
+            <h1 class="m-0 text-dark text-center">Restaurants</h1>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -60,7 +60,7 @@
         <!-- Main row -->
         <div class="row">
           <!-- Left col -->
-          <section class="col-lg-10 connectedSortable">
+          <section class="col-lg-12 connectedSortable">
             <!-- Custom tabs (Charts with tabs)-->
        
             <!-- /.card -->
@@ -106,10 +106,9 @@
               </td>
              
               <td>
-                <a href="">
-                  <button class="btn btn-danger">delete</button>
-                </a>
-                <a href="">
+              
+                
+                <a href="/admin/editform/restaurant/<%= item._id%>">
                   <button class="btn btn-warning"i>edit</button>
                 </a>
 

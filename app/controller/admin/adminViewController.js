@@ -1,7 +1,9 @@
+
 const orderModel = require("../../models/orderModel");
 const restaurantModel = require("../../models/restaurantModel");
 const reviewModel = require("../../models/reviewModel");
 const userModel = require("../../models/userModel");
+const carousalModel = require('../../models/carousalModel');
 
 class AdminViewController {
   login = async (req, res) => {
@@ -19,7 +21,7 @@ class AdminViewController {
   admindashboard = async (req, res) => {
     try{    
 
-      const totalUser=await userModel.find({role:{$ne:'admin'}})
+      const totalUser = await userModel.find({ role: { $nin: ['admin', 'restaurantOwner'] } });
       const totalOrder=await orderModel.find()
       const totalrestaurant=await restaurantModel.find()
 
@@ -82,11 +84,14 @@ class AdminViewController {
     try{
 
       const data=await userModel.find({role:{$eq:'user'}})
+      const resownerdata=await userModel.find({role:{$eq:'restaurantOwner'}})
       res.render("admin/layouts/Alluser", {
         title: "All User",
         logUser: req.user,
         data:data,
-        i:1
+        resdata:resownerdata,
+        i:1,
+        j:1
   
       });
     }catch(err){
@@ -95,7 +100,63 @@ class AdminViewController {
 
   };
 
+   editrestaurantForm=async(req,res)=>{
+    const id=req.params.id
+    const eduser=await restaurantModel.findById(id)
+    console.log();
 
+    if(eduser){
+      res.render('admin/layouts/editRestaurant',{
+        title:'restaurant edit',
+        logUser: req.user,
+        e:eduser
+  
+      })
+    }
+ 
+   }
+
+   carousaldata=async(req,res)=>{
+    try{
+      const data=await carousalModel.find()
+      console.log(data);
+
+      res.render('admin/layouts/AllCarousal',{
+        title:'home page',
+        data:data,
+        logUser: req.user
+        
+      })
+
+    }catch(err){
+console.log(err);
+    }
+   }
+
+
+   carousalForm=async(req,res)=>{
+    res.render('admin/layouts/Addcarousal',{
+      title:'add carousal page',
+      logUser: req.user
+    })
+   }
+
+
+   editCarousalForm=async(req,res)=>{
+    const id=req.params.id
+    const eduser=await carousalModel.findById(id)
+   
+
+    if(eduser){
+      res.render('admin/layouts/EditCarousal',{
+        title:'restaurant edit',
+        logUser: req.user,
+        e:eduser
+  
+      })
+    }
+ 
+   }
 
 
 }

@@ -154,7 +154,12 @@ addCategory = async (req, res) => {
     const restaurant = await restaurantModel.findOne({owner: req.user.id})
     if(!restaurant) return res.redirect("/restaurantOwner/restaurant/add")
 
+<<<<<<< HEAD
     const order = await orderModel.find().populate('user','menu')
+=======
+    const order = await orderModel.find({restaurant:restaurant._id}).populate(['user','menu'])
+    //console.log("kk",order);
+>>>>>>> a6ee1e6602b4b1c205712ab0f16ca5593ea389ce
     res.render("restaurantOwner/layouts/Order", {
       title: "Order",
       logUser: req.user,
@@ -163,6 +168,34 @@ addCategory = async (req, res) => {
     });
   }
 
+<<<<<<< HEAD
+=======
+
+//   updateOrderStatus = async (req, res) => {
+//     try {
+//         const { orderStatus, id } = req.params;
+
+//         if (orderStatus !== 'Confirmed' && orderStatus !== 'Cancelled') {
+//             return res.status(400).send('Invalid status');
+//         }
+
+//         // Update the order status
+//         const updatedOrder = await orderModel.findByIdAndUpdate(
+//             id,
+//             { orderStatus: orderStatus }, // Update status to 'Confirmed' or 'Cancelled'
+//             { new: true } // Return the updated document
+//         );
+
+//         res.redirect('/restaurantOwner/order');
+//     } catch (error) {
+//         console.error('Error updating order status:', error);
+//         res.status(500).send('Internal Server Error');
+//     }
+// };
+
+
+
+>>>>>>> a6ee1e6602b4b1c205712ab0f16ca5593ea389ce
   updateOrder = async (req, res) => {
     const restaurant = await restaurantModel.findOne({owner: req.user.id})
     if(!restaurant) return res.redirect("/restaurantOwner/restaurant/add")

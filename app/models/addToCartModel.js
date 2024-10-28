@@ -13,5 +13,5 @@ const addToCartSchema = new mongoose.Schema({
             count: Number
         }
     ],
-});
+},{timestamps: true, versionKey: false});
 module.exports = mongoose.model("AddToCart", addToCartSchema)
