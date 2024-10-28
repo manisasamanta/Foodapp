@@ -3,4 +3,4 @@ const userController = require("../../controller/admin/apiController/userAuthCon
 const router = express.Router();
 router.post("/login", userController.login);
 router.get("/logout", userController.logout);
-module.exports = router
+module.exports = router 

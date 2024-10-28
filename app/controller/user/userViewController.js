@@ -11,7 +11,7 @@ class UserViewController {
       // const existedToken = await Token.findOne({ token: token });
       return res.render("verifyEmail", { token: token });
     } catch (error) {
-      return res.status(500).json({
+      return res.status(500).json({ 
         success: false,
         message: error.message,
       });

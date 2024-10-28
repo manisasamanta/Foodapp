@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title><%= title %></title>
   <!-- Tell the browser to be responsive to screen width -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
@@ -73,8 +73,9 @@
               <thead class="thead-dark">
                 <tr>
                   <th scope="col">#</th>
+                  <th scope="col">User Name</th>
                   <th scope="col">Menu</th>
-                  <th scope="col">Ctaegory</th>
+                  <th scope="col">Order Status</th>
               
                  
                   <th scope="col">Action</th>
@@ -82,29 +83,33 @@
               </thead>
               <tbody>
                 <!--data map here -->
-               
+                <% for(let item of odata){%>
                   <tr>
                     <th scope="row"></th>
                     <td>
-                
+                      <%= item.user.name%>
                     </td>
                 
+                    <td>
+                      <%= item.menu.name%>
+                    </td>
+
                     <td>
               
                     </td>
                    
                     <td>
                       <a href="">
-                        <button class="btn btn-danger">delete</button>
+                        <button class="btn btn-success">Confirm</button>
                       </a>
                       <a href="">
-                        <button class="btn btn-warning"i>edit</button>
+                        <button class="btn btn-danger"i>Cancel</button>
                       </a>
 
                     </td>
 
                   </tr>
-                
+                  <%}%>
 
 
               </tbody>
